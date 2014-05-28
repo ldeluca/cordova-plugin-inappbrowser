@@ -19,21 +19,21 @@
 
 # org.apache.cordova.inappbrowser
 
-這個外掛程式提供了一個 web 瀏覽器視圖，顯示時調用 `window.open()` ，或當打開連結形成的作為`<a target="_blank">`.
+这个插件提供了一个 web 浏览器视图，显示时调用 `window.open()` ，或当打开链接形成的作为`<a target="_blank">`.
 
     var ref = window.open('http://apache.org', '_blank', 'location=yes');
     
 
-**注**： InAppBrowser 視窗的行為像一個標準的 web 瀏覽器，並且無法訪問科爾多瓦的 Api。
+**NOTE**： InAppBrowser 窗口的行为表现像一个标准的 web 浏览器，并且无法访问Cordova APIs。
 
-## 安裝
+## 安装
 
     cordova plugin add org.apache.cordova.inappbrowser
     
 
-### 火狐瀏覽器作業系統
+### 火狐浏览器操作系统
 
-在[清單檔][1]中所述創建**www/manifest.webapp** 。添加相關許可權。
+在[清单文件][1]中所述创建**www/manifest.webapp** 。添加相关权限。
 
  [1]: https://developer.mozilla.org/en-US/Apps/Developing/Manifest
 
@@ -44,58 +44,58 @@
 
 ## window.open
 
-在一個新的中打開 URL `InAppBrowser` 實例，當前的瀏覽器實例或系統瀏覽器。
+在一个新的中打开 URL `InAppBrowser` 实例，当前的浏览器实例或系统浏览器。
 
-    var ref = window.open (url、 目標、 選項） ；
+    var ref = window.open (url、 目标、 选项） ；
     
 
-*   **ref**： 參考 `InAppBrowser` 視窗。*() InAppBrowser*
+*   **ref**： 参考 `InAppBrowser` 窗口。*(InAppBrowser)*
 
-*   **url**： 要載入*（字串）*的 URL。調用 `encodeURI()` 這個如果 URL 包含 Unicode 字元。
+*   **url**： 要加载*(String)*的 URL。如果 URL 包含 Unicode 字符则在此调用 `encodeURI()` 。
 
-*   **目標**： 目標在其中載入的 URL，可選參數，預設值為 `_self` 。*（字串）*
+*   **target**：在其中加载的 URL的目标，默认值为 `_self`的可选参数 。*(String)*
     
-    *   `_self`： 打開在科爾多瓦 web 視圖如果 URL 是在白名單中，否則它在打開`InAppBrowser`.
-    *   `_blank`： 在打開`InAppBrowser`.
-    *   `_system`： 在該系統的 web 瀏覽器中打開。
+    *   `_self`： 如果 URL 是在白名单中则在Cordova web 视图中打开，否则它在`InAppBrowser`中打开.
+    *   `_blank`： 在`InAppBrowser`中打开.
+    *   `_system`： 在该系统的 web 浏览器中打开。
 
-*   **選項**： 選項為 `InAppBrowser` 。可選，拖欠到： `location=yes` 。*（字串）*
+*   **options**： 选项为 `InAppBrowser` 。可选，默认值为： `location=yes` 。*(String)*
     
-    `options`字串必須不包含任何空白的空間，和必須用逗號分隔每個功能的名稱/值對。 功能名稱區分大小寫。 所有平臺都支援下面的值：
+    `options`字符串必须不包含任何空白的空间，并且每个功能的名称/值对必须用逗号分隔。 功能名称区分大小写。 所有平台都支持下面的值：
     
-    *   **位置**： 設置為 `yes` 或 `no` ，打開 `InAppBrowser` 的位置欄打開或關閉。
+    *   **location**： 设置为 `yes` 或 `no` ，打开 `InAppBrowser` 的位置栏开或关。
     
-    Android 系統只有：
+    仅仅Android 系统支持一下属性：
     
-    *   **closebuttoncaption**: 設置為一個字串，以用作**做**按鈕的標題。
-    *   **隱藏**： 將設置為 `yes` ，創建瀏覽器和載入頁面，但不是顯示它。 載入完成時，將觸發 loadstop 事件。 省略或設置為 `no` （預設值），有的瀏覽器打開，然後以正常方式載入。
-    *   **clearcache**： 將設置為 `yes` 有瀏覽器的 cookie 清除緩存之前打開新視窗
-    *   **clearsessioncache**： 將設置為 `yes` 有會話 cookie 緩存清除之前打開新視窗
+    *   **closebuttoncaption**: 设置为一个字符串，以用作**Done**按钮的标题。
+    *   **hidden**： 将设置为 `yes` ，创建浏览器和加载页面，但不是显示它。 加载完成时，将触发 loadstop 事件。 省略或设置为 `no` （默认值），浏览器打开并且加载正常。
+    *   **clearcache**： 将设置为 `yes` ，打开新窗口之前浏览器的 cookie 清除缓存
+    *   **clearsessioncache**： 将设置为 `yes` ，打开新窗口之前清除会话cookie 缓存
     
-    只有 iOS：
+    如下只有 iOS支持：
     
-    *   **closebuttoncaption**: 設置為一個字串，以用作**做**按鈕的標題。請注意您需要對此值進行當地語系化你自己。
-    *   **disallowoverscroll**： 將設置為 `yes` 或 `no` （預設值是 `no` ）。打開/關閉的 UIWebViewBounce 屬性。
-    *   **隱藏**： 將設置為 `yes` ，創建瀏覽器和載入頁面，但不是顯示它。 載入完成時，將觸發 loadstop 事件。 省略或設置為 `no` （預設值），有的瀏覽器打開，然後以正常方式載入。
-    *   **clearcache**： 將設置為 `yes` 有瀏覽器的 cookie 清除緩存之前打開新視窗
-    *   **clearsessioncache**： 將設置為 `yes` 有會話 cookie 緩存清除之前打開新視窗
-    *   **工具列**： 設置為 `yes` 或 `no` ，為 InAppBrowser （預設為打開或關閉工具列`yes`)
-    *   **enableViewportScale**： 將設置為 `yes` 或 `no` ，防止通過 meta 標記 （預設為縮放的視區`no`).
-    *   **mediaPlaybackRequiresUserAction**： 將設置為 `yes` 或 `no` ，防止 HTML5 音訊或視頻從 autoplaying （預設為`no`).
-    *   **allowInlineMediaPlayback**： 將設置為 `yes` 或 `no` ，讓線在 HTML5 播放媒體，在瀏覽器視窗中，而不是特定于設備播放介面內顯示。 HTML 的 `video` 元素還必須包括 `webkit-playsinline` 屬性 （預設為`no`)
-    *   **keyboardDisplayRequiresUserAction**： 將設置為 `yes` 或 `no` 時，要打開鍵盤表單元素接收焦點通過 JavaScript 的 `focus()` 調用 （預設為`yes`).
-    *   **suppressesIncrementalRendering**： 將設置為 `yes` 或 `no` 等待，直到所有新查看的內容正在呈現 （預設為前收到`no`).
-    *   **presentationstyle**： 將設置為 `pagesheet` ， `formsheet` 或 `fullscreen` 來設置[演示文稿樣式][2](預設為`fullscreen`).
-    *   **transitionstyle**： 將設置為 `fliphorizontal` ， `crossdissolve` 或 `coververtical` 設置[過渡樣式][3](預設為`coververtical`).
-    *   **toolbarposition**： 將設置為 `top` 或 `bottom` （預設值是 `bottom` ）。使工具列，則在頂部或底部的視窗。
+    *   **closebuttoncaption**: 设置为一个字符串，以用作**Donw**按钮的标题。请注意您需要你自己对此值进行本地化。
+    *   **disallowoverscroll**： 将设置为 `yes` 或 `no` （默认值是 `no` ）。打开/关闭的 UIWebViewBounce 属性。
+    *   **隐藏**： 将设置为 `yes` ，创建浏览器和加载页面，但不是显示它。 加载完成时，将触发 loadstop 事件。 省略或设置为 `no` （默认值），有的浏览器打开，然后以正常方式加载。
+    *   **clearcache**： 将设置为 `yes` 有浏览器的 cookie 清除缓存之前打开新窗口
+    *   **clearsessioncache**： 将设置为 `yes` 有会话 cookie 缓存清除之前打开新窗口
+    *   **工具栏**： 设置为 `yes` 或 `no` ，为 InAppBrowser （默认为打开或关闭工具栏`yes`)
+    *   **enableViewportScale**： 将设置为 `yes` 或 `no` ，防止通过 meta 标记 （默认为缩放的视区`no`).
+    *   **mediaPlaybackRequiresUserAction**： 将设置为 `yes` 或 `no` ，防止 HTML5 音频或视频从 autoplaying （默认为`no`).
+    *   **allowInlineMediaPlayback**： 将设置为 `yes` 或 `no` ，让线在 HTML5 播放媒体，在浏览器窗口中，而不是特定于设备播放界面内显示。 HTML 的 `video` 元素还必须包括 `webkit-playsinline` 属性 （默认为`no`)
+    *   **keyboardDisplayRequiresUserAction**： 将设置为 `yes` 或 `no` 时，要打开键盘窗体元素接收焦点通过 JavaScript 的 `focus()` 调用 （默认为`yes`).
+    *   **suppressesIncrementalRendering**： 将设置为 `yes` 或 `no` 等待，直到所有新查看的内容正在呈现 （默认为前收到`no`).
+    *   **presentationstyle**： 将设置为 `pagesheet` ， `formsheet` 或 `fullscreen` 来设置[演示文稿样式][2](默认为`fullscreen`).
+    *   **transitionstyle**： 将设置为 `fliphorizontal` ， `crossdissolve` 或 `coververtical` 设置[过渡样式][3](默认为`coververtical`).
+    *   **toolbarposition**： 将设置为 `top` 或 `bottom` （默认值是 `bottom` ）。使工具栏，则在顶部或底部的窗口。
 
  [2]: http://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/Reference/Reference.html#//apple_ref/occ/instp/UIViewController/modalPresentationStyle
  [3]: http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIViewController_Class/Reference/Reference.html#//apple_ref/occ/instp/UIViewController/modalTransitionStyle
 
-### 支援的平臺
+### 支持的平台
 
-*   亞馬遜火 OS
-*   Android 系統
+*   亚马逊火 OS
+*   Android 系统
 *   黑莓 10
 *   iOS
 *   Windows Phone 7 和 8
@@ -108,7 +108,7 @@
 
 ## InAppBrowser
 
-從調用返回的物件`window.open`.
+从调用返回的对象`window.open`.
 
 ### 方法
 
@@ -121,36 +121,36 @@
 
 ## addEventListener
 
-> 為事件添加一個攔截器`InAppBrowser`.
+> 从该`InAppBrowser`中添加一个事件侦听器.
 
     ref.addEventListener(eventname, callback);
     
 
-*   **ref**： 參考 `InAppBrowser` 視窗*(InAppBrowser)*
+*   **ref**： 参考 `InAppBrowser` 窗口*(InAppBrowser)*
 
-*   **事件名稱**： 事件偵聽*（字串）*
+*   **eventname**： 需要监听的事件*(String)*
     
-    *   **loadstart**： 當觸發事件 `InAppBrowser` 開始載入一個 URL。
-    *   **loadstop**： 當觸發事件 `InAppBrowser` 完成載入一個 URL。
-    *   **loaderror**： 當觸發事件 `InAppBrowser` 載入 URL 時遇到錯誤。
-    *   **退出**： 當觸發事件 `InAppBrowser` 關閉視窗。
+    *   **loadstart**：当`InAppBrowser` 开始加载一个 URL的时候触发事件。
+    *   **loadstop**：当 `InAppBrowser` 完成加载一个 URL的时候触发事件。
+    *   **loaderror**： 当`InAppBrowser` 加载 URL遇到错误时触发事件。
+    *   **exit**： 当`InAppBrowser` 关闭窗口时触发事件。
 
-*   **回檔**： 執行時觸發該事件的函數。該函數通過 `InAppBrowserEvent` 物件作為參數。
+*   **callback**：触发该事件的时候执行该函数。该函数被通过一个作为参数的`InAppBrowserEvent` 对象。
 
-### InAppBrowserEvent 屬性
+### InAppBrowserEvent 属性
 
-*   **類型**： eventname，或者 `loadstart` ， `loadstop` ， `loaderror` ，或 `exit` 。*（字串）*
+*   **type**： eventname，或者 `loadstart` ， `loadstop` ， `loaderror` ，或 `exit` 。*(String)*
 
-*   **url**: 已載入的 URL。*（字串）*
+*   **url**: 已加载的 URL。*(String)*
 
-*   **代碼**： 僅中的情況的錯誤代碼 `loaderror` 。*（人數）*
+*   **code**： 仅在`loaderror`情况中的错误代码 。*(Number)*
 
-*   **消息**： 該錯誤訊息，只有在的情況下 `loaderror` 。*（字串）*
+*   **message**： 该错误消息，只有在`loaderror`的情况下 。*(String)*
 
-### 支援的平臺
+### 支持的平台
 
-*   亞馬遜火 OS
-*   Android 系統
+*   亚马逊火 OS
+*   Android 系统
 *   iOS
 *   Windows Phone 7 和 8
 
@@ -162,26 +162,26 @@
 
 ## removeEventListener
 
-> 移除的事件攔截器`InAppBrowser`.
+> 去除`InAppBrowser`一个事件监听器.
 
     ref.removeEventListener(eventname, callback);
     
 
-*   **ref**： 參考 `InAppBrowser` 視窗。*() InAppBrowser*
+*   **ref**： 参考 `InAppBrowser` 窗口。*(InAppBrowser)*
 
-*   **事件名稱**： 要停止偵聽的事件。*（字串）*
+*   **eventname**： 要停止侦听的事件。*(String)*
     
-    *   **loadstart**： 當觸發事件 `InAppBrowser` 開始載入一個 URL。
-    *   **loadstop**： 當觸發事件 `InAppBrowser` 完成載入一個 URL。
-    *   **loaderror**： 當觸發事件 `InAppBrowser` 遇到錯誤載入一個 URL。
-    *   **退出**： 當觸發事件 `InAppBrowser` 關閉視窗。
+    *   **loadstart**： 当触发事件 `InAppBrowser` 开始加载一个 URL。
+    *   **loadstop**： 当触发事件 `InAppBrowser` 完成加载一个 URL。
+    *   **loaderror**： 当`InAppBrowser` 加载 URL遇到错误时触发事件。
+    *   **退出**： 当触发事件 `InAppBrowser` 关闭窗口。
 
-*   **回檔**: 要在事件觸發時執行的函數。該函數通過 `InAppBrowserEvent` 物件。
+*   **回调**: 要在事件触发时执行的函数。该函数通过 `InAppBrowserEvent` 对象。
 
-### 支援的平臺
+### 支持的平台
 
-*   亞馬遜火 OS
-*   Android 系統
+*   亚马逊火 OS
+*   Android 系统
 *   iOS
 *   Windows Phone 7 和 8
 
@@ -195,17 +195,17 @@
 
 ## close
 
-> 關閉 `InAppBrowser` 視窗。
+> 关闭 `InAppBrowser` 窗口。
 
     ref.close() ；
     
 
-*   **ref**： 參考 `InAppBrowser` 視窗*(InAppBrowser)*
+*   **ref**： 参考 `InAppBrowser` 窗口*(InAppBrowser)*
 
-### 支援的平臺
+### 支持的平台
 
-*   亞馬遜火 OS
-*   Android 系統
+*   亚马逊火 OS
+*   Android 系统
 *   iOS
 *   Windows Phone 7 和 8
 
@@ -217,17 +217,17 @@
 
 ## show
 
-> 顯示打開了隱藏的 InAppBrowser 視窗。調用這沒有任何影響，如果 InAppBrowser 是已經可見。
+> 显示打开了隐藏的 InAppBrowser 窗口。如果 InAppBrowser 是已经可见的，调用这个窗口没有任何影响。
 
     ref.show() ；
     
 
-*   **ref**： InAppBrowser 視窗 (參考`InAppBrowser`)
+*   **ref**：参考 InAppBrowser 窗口 (`InAppBrowser`)
 
-### 支援的平臺
+### 支持的平台
 
-*   亞馬遜火 OS
-*   Android 系統
+*   亚马逊火 OS
+*   Android 系统
 *   iOS
 
 ### 快速的示例
@@ -239,26 +239,26 @@
 
 ## executeScript
 
-> 注入到 JavaScript 代碼 `InAppBrowser` 視窗
+> 注入 JavaScript 代码到 `InAppBrowser` 窗口
 
     ref.executeScript(details, callback);
     
 
-*   **ref**： 參考 `InAppBrowser` 視窗。*() InAppBrowser*
+*   **ref**： 参考 `InAppBrowser` 窗口。*() InAppBrowser*
 
-*   **injectDetails**: 要運行的腳本的詳細資訊或指定 `file` 或 `code` 的關鍵。*（物件）*
+*   **injectDetails**: 要运行的脚本的详细信息，指定任意一个`file` 或 `code` 键。*(Object)*
     
-    *   **檔**： 腳本的 URL 來注入。
-    *   **代碼**： 要注入腳本的文本。
+    *   **file**： 注入脚本的 URL 。
+    *   **code**： 注入脚本的文本。
 
-*   **回檔**： 執行後注入的 JavaScript 代碼的函數。
+*   **callback**： 当 JavaScript 代码被注入后执行该函数。
     
-    *   如果插入的腳本的類型 `code` ，回檔執行使用單個參數，這是該腳本的傳回值，裹在 `Array` 。 對於多行腳本，這是最後一條語句或最後計算的運算式的傳回值。
+    *   如果插入的脚本是`code` 类型，使用单个参数来回调执行，这是该脚本的返回值，包装在 `Array`中。 对于多行脚本，这是最后一条语句或最后计算的表达式的返回值。
 
-### 支援的平臺
+### 支持的平台
 
-*   亞馬遜火 OS
-*   Android 系統
+*   亚马逊火 OS
+*   Android 系统
 *   iOS
 
 ### 快速的示例
@@ -271,24 +271,24 @@
 
 ## insertCSS
 
-> 注入到 CSS `InAppBrowser` 視窗。
+> 注入CSS代码到 `InAppBrowser` 窗口。
 
     ref.insertCSS(details, callback);
     
 
-*   **ref**： 參考 `InAppBrowser` 視窗*(InAppBrowser)*
+*   **ref**： 参考 `InAppBrowser` 窗口*(InAppBrowser)*
 
-*   **injectDetails**: 要運行的腳本的詳細資訊或指定 `file` 或 `code` 的關鍵。*（物件）*
+*   **injectDetails**: 要运行的脚本的详细信息或指定 `file` 或 `code` 的关键。*（对象）*
     
-    *   **檔**： 樣式表的 URL 來注入。
-    *   **代碼**： 文本樣式表的注入。
+    *   **file**：注入样式表的 URL。
+    *   **code**： 注入文本样式表。
 
-*   **回檔**： 在 CSS 注射後執行的函數。
+*   **callback**： 在 CSS 代码被注入后执行该函数。
 
-### 支援的平臺
+### 支持的平台
 
-*   亞馬遜火 OS
-*   Android 系統
+*   亚马逊火 OS
+*   Android 系统
 *   iOS
 
 ### 快速的示例
